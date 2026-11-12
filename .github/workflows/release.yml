@@ -1,0 +1,37 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Kerakli paketlarni o'rnatish
+        run: sudo apt-get update && sudo apt-get install -y libgtk-3-dev
+
+      - name: Yig'ish
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          if [ "$GITHUB_REF_TYPE" != "tag" ]; then VERSION=""; fi
+          bash packaging/build-release.sh $VERSION
+
+      - name: Fayllarni saqlash
+        uses: actions/upload-artifact@v4
+        with:
+          name: uz-paint
+          path: dist/*
+
+      - name: GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*
+          generate_release_notes: true
