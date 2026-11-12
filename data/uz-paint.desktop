@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+Name=Uz Paint
+GenericName=Rasm çiziş
+GenericName[en]=Drawing program
+Comment=Linux uçun yengil rasm çiziş dasturi
+Comment[en]=A lightweight drawing program for Linux
+Exec=uz-paint %f
+Icon=uz-paint
+Terminal=false
+Categories=Graphics;2DGraphics;RasterGraphics;
+MimeType=image/png;image/jpeg;image/bmp;image/gif;image/webp;image/tiff;
+Keywords=paint;draw;drawing;image;rasm;çiziş;
+StartupWMClass=uz-paint
